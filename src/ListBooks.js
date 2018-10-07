@@ -1,16 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import RenderBooks from './RenderBooks'
+import * as BooksAPI from './BooksAPI'
 
 class ListBooks extends React.Component {
 
 	state = {
-		currentlyReading: [],
-		wantToRead: [],
-		read: []
+		bookshelfBooks: []
+	}
+
+	componentDidMount() {
+		BooksAPI.getAll().then((books) => {
+			this.setState({ bookshelfBooks: books })
+		})
 	}
 
 	render() {
+		const books = this.state.bookshelfBooks
+
 		return (
           <div className="list-books">
             <div className="list-books-title">
@@ -21,19 +28,19 @@ class ListBooks extends React.Component {
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
-                  	<RenderBooks books={this.state.currentlyReading}/>
+                  	<RenderBooks books={books.filter((book) => book.shelf === 'currentlyReading')}/>
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
-                  	<RenderBooks books={this.state.wantToRead}/>
+                  	<RenderBooks books={books.filter((book) => book.shelf === 'wantToRead')}/>
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
-                  	<RenderBooks books={this.state.read}/>
+                  	<RenderBooks books={books.filter((book) => book.shelf === 'read')}/>
                   </div>
                 </div>
               </div>
