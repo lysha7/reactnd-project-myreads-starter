@@ -5,14 +5,15 @@ class RenderBooks extends React.Component {
 
 	render() {
 		const { books } = this.props
-		if (books !== undefined && books.length !== 0) {
+		
+		if (Array.isArray(books) && books.length !== 0) {
 			return(
 		        <ol className="books-grid">
 		        	{books.map((book) => (
 						<li key={book.id}>
 						<div className="book">
 						  <div className="book-top">
-						    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
+						    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(https://books.google.com/books/content?id=${book.id}&printsec=frontcover&img=1&zoom=1)` }}></div>
 						    <BookshelfChanger/>
 						  </div>
 						  <div className="book-title">{book.title !== undefined && book.title}</div>
