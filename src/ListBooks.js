@@ -4,6 +4,12 @@ import RenderBooks from './RenderBooks'
 
 class ListBooks extends React.Component {
 
+	state = {
+		currentlyReading: [],
+		wantToRead: [],
+		read: []
+	}
+
 	render() {
 		return (
           <div className="list-books">
@@ -15,19 +21,19 @@ class ListBooks extends React.Component {
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
-                  	<RenderBooks/>
+                  	<RenderBooks books={this.state.currentlyReading}/>
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
-                  	<RenderBooks/>
+                  	<RenderBooks books={this.state.wantToRead}/>
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
-                  	<RenderBooks/>
+                  	<RenderBooks books={this.state.read}/>
                   </div>
                 </div>
               </div>
