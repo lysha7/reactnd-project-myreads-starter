@@ -9,9 +9,7 @@ class RenderBooks extends React.Component {
 	}
 
 	changeShelf = (bookId, value) => {
-		this.setState({ currentShelf: value })
-		console.log(bookId, value)
-		BooksAPI.update({id: bookId}, value).then((response) => console.log(response))
+		BooksAPI.update({id: bookId}, value).then(this.setState({ currentShelf: value }))
 	}
 
 	render() {
@@ -27,7 +25,7 @@ class RenderBooks extends React.Component {
 						    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(https://books.google.com/books/content?id=${book.id}&printsec=frontcover&img=1&zoom=1)` }}></div>
 						    <BookshelfChanger
 						    	changeShelf={this.changeShelf.bind(this)}
-						    	currentShelf={this.state.currentShelf}
+						    	currentShelf={book.shelf ? book.shelf : 'none'}
 						    	bookId={book.id}
 						    />
 						  </div>

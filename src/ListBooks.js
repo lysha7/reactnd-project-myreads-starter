@@ -6,7 +6,7 @@ import * as BooksAPI from './BooksAPI'
 class ListBooks extends React.Component {
 
 	state = {
-		bookshelfBooks: []
+		bookshelfBooks: [],
 	}
 
 	componentDidMount() {
@@ -28,19 +28,25 @@ class ListBooks extends React.Component {
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
-                  	<RenderBooks books={books.filter((book) => book.shelf === 'currentlyReading')}/>
+                  	<RenderBooks
+                  		books={books.filter((book) => book.shelf === 'currentlyReading')}
+                  	/>
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
-                  	<RenderBooks books={books.filter((book) => book.shelf === 'wantToRead')}/>
+                  	<RenderBooks
+                  		books={books.filter((book) => book.shelf === 'wantToRead')}
+                  	/>
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
-                  	<RenderBooks books={books.filter((book) => book.shelf === 'read')}/>
+                  	<RenderBooks
+                  		books={books.filter((book) => book.shelf === 'read')}
+                  	/>
                   </div>
                 </div>
               </div>
