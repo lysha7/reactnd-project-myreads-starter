@@ -8,13 +8,18 @@ import './App.css'
 class BooksApp extends React.Component {
 
   state= {
-    currentShelf: 'none'
+    currentShelf: 'none',
+    bookshelfBooks: []
   }
 
   changeShelf = (bookId, value) => {
-    this.setState({ currentShelf: value })
-    console.log(bookId, value)
-    BooksAPI.update({id: bookId}, value).then((response) => console.log(response))
+    BooksAPI.update({id: bookId}, value).then((response) => this.setState({ currentShelf: value, bookshelfBooks: response }))
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({ bookshelfBooks: books})
+    })
   }
 
   render() {
@@ -24,6 +29,7 @@ class BooksApp extends React.Component {
           <ListBooks
             currentShelf={this.state.currentShelf}
             changeShelf={this.changeShelf}
+            bookshelfBooks={this.state.bookshelfBooks}
           />
           )}
         />
@@ -31,6 +37,7 @@ class BooksApp extends React.Component {
           <SearchBooks
             currentShelf={this.state.currentShelf}
             changeShelf={this.changeShelf}
+            bookshelfBooks={this.state.bookshelfBooks}
           />
           )}
         />
