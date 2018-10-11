@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Bookshelf from './Bookshelf'
-import * as BooksAPI from './BooksAPI'
 
 class ListBooks extends React.Component {
 
@@ -15,9 +14,24 @@ class ListBooks extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-              	<Bookshelf title="Currently Reading" value="currentlyReading" books={books.filter((book) => book.shelf === 'currentlyReading')}/>
-              	<Bookshelf title="Want To Read" value="wantToRead" books={books.filter((book) => book.shelf === 'wantToRead')}/>
-              	<Bookshelf title="Read" value="read" books={books.filter((book) => book.shelf === 'read')}/>
+              	<Bookshelf
+              		title="Currently Reading"
+              		value="currentlyReading"
+              		books={books.filter((book) => book.shelf === 'currentlyReading')}
+              		changeShelf={this.props.changeShelf}
+              	/>
+              	<Bookshelf
+              		title="Want To Read"
+              		value="wantToRead"
+              		books={books.filter((book) => book.shelf === 'wantToRead')}
+              		changeShelf={this.props.changeShelf}
+              	/>
+              	<Bookshelf
+              		title="Read"
+              		value="read"
+              		books={books.filter((book) => book.shelf === 'read')}
+              		changeShelf={this.props.changeShelf}
+              	/>
               </div>
             </div>
             <div className="open-search">

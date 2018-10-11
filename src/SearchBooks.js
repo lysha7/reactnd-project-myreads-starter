@@ -16,6 +16,13 @@ class SearchBooks extends React.Component {
 
 	search = (query) => {
 		BooksAPI.search(query).then((books) => {
+			if (Array.isArray(books)) {
+				books = books.filter((book) => {
+					const shelfBookIds = this.props.bookshelfBooks.map((shelfBook) => shelfBook.id)
+					return !shelfBookIds.includes(book.id)
+				})
+
+			}
 			this.setState({ books })
 		})
 	}
@@ -43,6 +50,7 @@ class SearchBooks extends React.Component {
             	<div className="search-books-results">
               		<RenderBooks
               			books={this.state.books}
+              			changeShelf={this.props.changeShelf}
               		/>
             	</div>
           	</div>

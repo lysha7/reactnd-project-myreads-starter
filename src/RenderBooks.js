@@ -1,16 +1,7 @@
 import React from 'react'
 import BookshelfChanger from './BookshelfChanger'
-import * as BooksAPI from './BooksAPI'
 
 class RenderBooks extends React.Component {
-
-	state= {
-		currentShelf: 'none'
-	}
-
-	changeShelf = (bookId, value) => {
-		BooksAPI.update({id: bookId}, value).then(this.setState({ currentShelf: value }))
-	}
 
 	render() {
 		const { books } = this.props
@@ -24,9 +15,8 @@ class RenderBooks extends React.Component {
 						  <div className="book-top">
 						    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(https://books.google.com/books/content?id=${book.id}&printsec=frontcover&img=1&zoom=1)` }}></div>
 						    <BookshelfChanger
-						    	changeShelf={this.changeShelf.bind(this)}
-						    	currentShelf={book.shelf ? book.shelf : 'none'}
-						    	bookId={book.id}
+						    	changeShelf={this.props.changeShelf}
+						    	book={book}
 						    />
 						  </div>
 						  <div className="book-title">{book.title !== undefined && book.title}</div>

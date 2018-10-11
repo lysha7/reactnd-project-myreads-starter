@@ -8,17 +8,16 @@ import './App.css'
 class BooksApp extends React.Component {
 
   state= {
-    currentShelf: 'none',
     bookshelfBooks: []
   }
 
   changeShelf = (bookId, value) => {
-    BooksAPI.update({id: bookId}, value).then((response) => this.setState({ currentShelf: value, bookshelfBooks: response }))
+    BooksAPI.update({id: bookId}, value).then(() => {BooksAPI.getAll().then((books) => this.setState({ bookshelfBooks: books }))})
   }
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      this.setState({ bookshelfBooks: books})
+      this.setState({ bookshelfBooks: books })
     })
   }
 
@@ -27,17 +26,15 @@ class BooksApp extends React.Component {
       <div className="app">
         <Route exact path="/" render={() => (
           <ListBooks
-            currentShelf={this.state.currentShelf}
-            changeShelf={this.changeShelf}
             bookshelfBooks={this.state.bookshelfBooks}
+            changeShelf={this.changeShelf}
           />
           )}
         />
         <Route path="/search" render={() => (
           <SearchBooks
-            currentShelf={this.state.currentShelf}
-            changeShelf={this.changeShelf}
             bookshelfBooks={this.state.bookshelfBooks}
+            changeShelf={this.changeShelf}
           />
           )}
         />

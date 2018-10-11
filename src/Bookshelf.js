@@ -11,6 +11,7 @@ class Bookshelf extends React.Component {
 	          <div className="bookshelf-books">
 	          	<RenderBooks
 	          		books={this.props.books}
+	          		changeShelf={this.props.changeShelf}
 	          	/>
 	          </div>
 	        </div>
