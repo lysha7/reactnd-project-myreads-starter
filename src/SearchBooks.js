@@ -6,7 +6,7 @@ import * as BooksAPI from './BooksAPI'
 class SearchBooks extends React.Component {
 
 	state = {
-		books: [],
+		results: [],
 		query: ''
 	}
 
@@ -15,15 +15,21 @@ class SearchBooks extends React.Component {
 	}
 
 	search = (query) => {
-		BooksAPI.search(query).then((books) => {
-			if (Array.isArray(books)) {
-				books = books.filter((book) => {
-					const shelfBookIds = this.props.bookshelfBooks.map((shelfBook) => shelfBook.id)
-					return !shelfBookIds.includes(book.id)
-				})
+		BooksAPI.search(query).then((results) => {
+			// Only runs if search is returning an array
+			if (Array.isArray(results)) {
+				const shelfBooks = this.props.bookshelfBooks
 
+				// Iterates through array of search results and books on bookshelves. If id's from the two arrays match, set the shelf of the search result to match
+				for (const result of results) {
+					for (const shelfBook of shelfBooks) {
+						if (result.id === shelfBook.id) {
+							result.shelf = shelfBook.shelf
+						}
+					}
+				}
 			}
-			this.setState({ books })
+			this.setState({ results })
 		})
 	}
 
@@ -49,7 +55,7 @@ class SearchBooks extends React.Component {
             	</div>
             	<div className="search-books-results">
               		<RenderBooks
-              			books={this.state.books}
+              			books={this.state.results}
               			changeShelf={this.props.changeShelf}
               		/>
             	</div>

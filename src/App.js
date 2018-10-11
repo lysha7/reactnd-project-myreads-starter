@@ -11,8 +11,8 @@ class BooksApp extends React.Component {
     bookshelfBooks: []
   }
 
-  changeShelf = (bookId, value) => {
-    BooksAPI.update({id: bookId}, value).then(() => {BooksAPI.getAll().then((books) => this.setState({ bookshelfBooks: books }))})
+  changeShelf = (book, value) => {
+    BooksAPI.update({id: book.id}, value).then(() => {BooksAPI.getAll().then((books) => this.setState({ bookshelfBooks: books }))})
   }
 
   componentDidMount() {
