@@ -10,14 +10,23 @@ class SearchBooks extends React.Component {
 		query: ''
 	}
 
+	// Thanks to Carlos F. for help with a bug fix in this function
 	updateQuery = (query) => {
-		this.setState({ query })
+		if (query) {
+			this.setState({ query })
+			this.search(query)
+		}
+		else {
+			this.setState({ results: [], query: '' })
+		}
+		
 	}
 
 	search = (query) => {
 		BooksAPI.search(query).then((results) => {
 			// Only runs if search is returning an array
 			if (Array.isArray(results)) {
+				// This is an array of the books currently on the shelves already
 				const shelfBooks = this.props.bookshelfBooks
 
 				// Iterates through array of search results and books on bookshelves. If id's from the two arrays match, sets the shelf of the search result to match
@@ -47,7 +56,6 @@ class SearchBooks extends React.Component {
                 			value={this.state.query}
                 			onChange={(event) => {
                 				this.updateQuery(event.target.value)
-                				this.search(this.state.query)
                 			}}
                 		/>
 
