@@ -10,7 +10,7 @@ class SearchBooks extends React.Component {
 		query: ''
 	}
 
-	// Thanks to Carlos F. for help with a bug fix in this function
+	// Thanks to Slack user Carlos F. for help with a bug fix in this function
 	updateQuery = (query) => {
 		if (query) {
 			this.setState({ query })

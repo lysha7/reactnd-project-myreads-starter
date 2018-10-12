@@ -2,11 +2,23 @@ import React from 'react'
 
 class BookshelfChanger extends React.Component {
 
+	// Thanks to Slack user Carlos F. for help with storing/updating the state of the selection menu
+	state = {
+		shelf: this.props.book.shelf || 'none'
+	}
+
+	changeShelf = (book, shelf) => {
+		if (this.state.shelf !== shelf) {
+			this.setState( {shelf} )
+			this.props.changeShelf(book, shelf)
+		}
+	}
+
 	render() {
 
 		return(
 	        <div className="book-shelf-changer">
-	          <select value={this.props.book.shelf ? this.props.book.shelf : 'none'} onChange={(event) => this.props.changeShelf(this.props.book, event.target.value)}>
+	          <select value={this.state.shelf} onChange={(event) => this.changeShelf(this.props.book, event.target.value)}>
 	            <option value="move" disabled>Move to...</option>
 	            <option value="currentlyReading">Currently Reading</option>
 	            <option value="wantToRead">Want to Read</option>
