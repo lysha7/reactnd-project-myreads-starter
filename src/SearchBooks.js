@@ -20,7 +20,7 @@ class SearchBooks extends React.Component {
 			if (Array.isArray(results)) {
 				const shelfBooks = this.props.bookshelfBooks
 
-				// Iterates through array of search results and books on bookshelves. If id's from the two arrays match, set the shelf of the search result to match
+				// Iterates through array of search results and books on bookshelves. If id's from the two arrays match, sets the shelf of the search result to match
 				for (const result of results) {
 					for (const shelfBook of shelfBooks) {
 						if (result.id === shelfBook.id) {

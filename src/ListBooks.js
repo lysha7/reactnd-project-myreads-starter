@@ -16,19 +16,16 @@ class ListBooks extends React.Component {
               <div>
               	<Bookshelf
               		title="Currently Reading"
-              		value="currentlyReading"
               		books={books.filter((book) => book.shelf === 'currentlyReading')}
               		changeShelf={this.props.changeShelf}
               	/>
               	<Bookshelf
               		title="Want To Read"
-              		value="wantToRead"
               		books={books.filter((book) => book.shelf === 'wantToRead')}
               		changeShelf={this.props.changeShelf}
               	/>
               	<Bookshelf
               		title="Read"
-              		value="read"
               		books={books.filter((book) => book.shelf === 'read')}
               		changeShelf={this.props.changeShelf}
               	/>
